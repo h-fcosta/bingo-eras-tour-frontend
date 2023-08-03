@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { ISong } from "../../interface/ISong";
+import { formatDate } from "../../utils/formatDate";
+import { GridCell } from "./styles";
 import api from "../../api";
 import "./Grid.css";
 import "bulma/css/bulma.min.css";
@@ -14,12 +16,12 @@ export default function GridTable() {
     try {
       api.get<ISong[]>("/songs").then((res) => {
         setData(res.data);
+        console.log(data);
       });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
 
-    console.log(data);
     // eslint-disable-next-line
   }, []);
 
@@ -35,28 +37,31 @@ export default function GridTable() {
       const songRow = songChunks[i] || [];
 
       const rowCells = songRow.map((song) => {
-        const setList = Boolean(Number(song.on_set_list));
-        const surpriseSong = Boolean(Number(song.played));
-
         return (
-          <td key={song.spotify_song_id}>
-            <p className="song-title">{song.song_name}</p>
-            <div>
-              <a
-                href={song.spotify_link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Listen on Spotify
-              </a>
-              <br />
-              {setList ? "On Setlist" : "Not on setlist"}
-              <br />
-              {surpriseSong
-                ? `Venue: ${song.played_at} \n Date: ${song.played_when}`
-                : "Not Played yet!"}
-            </div>
-          </td>
+          <GridCell
+            key={song.id}
+            bgcolor={song.album.album_color}
+            setlist={song.on_set_list}
+            surprise={song.played}
+          >
+            <p className="song-title">{song.song_name || song.single_name}</p>
+
+            {song.played && (
+              <>
+                Venue: {song.played_at}
+                <br />
+                Date: {formatDate(song.played_when)}
+              </>
+            )}
+            <br />
+            <a
+              href={song.spotify_link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Listen on Spotify
+            </a>
+          </GridCell>
         );
       });
       tableRows.push(<tr key={i}>{rowCells}</tr>);
@@ -65,10 +70,8 @@ export default function GridTable() {
   }
 
   return (
-    <div className="table-container">
-      <table className="table is-bordered is-fullwidth is-hoverable">
-        <tbody>{generateGrid()}</tbody>
-      </table>
-    </div>
+    <table className="table is-bordered is-fullwidth">
+      <tbody>{generateGrid()}</tbody>
+    </table>
   );
 }

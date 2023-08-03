@@ -4,30 +4,13 @@ td {
   vertical-align: top;
 }
 
-.cell-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%; /* The cell content will occupy the full height of the cell */
-  padding: 8px;
-  box-sizing: border-box;
-  min-width: 100%; /* The content will not shrink below the table cell's width */
-  word-wrap: break-word; /* Allow breaking long words */
-}
-
 .song-title {
   text-align: center;
   font-weight: bold;
-  margin-bottom: 4px;
+  font-size: 15px;
 }
 
-/* Optional styles to add some spacing and borders to the cells */
-td:not(:last-child) {
-  border-right: 1px solid #ddd;
-}
-
-tr:not(:last-child) {
-  border-bottom: 1px solid #ddd;
+a {
+  color: white !important;
+  text-decoration: underline !important;
 }
