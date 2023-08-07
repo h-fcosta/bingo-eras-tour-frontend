@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ISong } from "../../interface/ISong";
 import { formatDate } from "../../utils/formatDate";
-import { GridCell } from "./styles";
+import { GridCell, GridFilter, SongName } from "./styles";
 import api from "../../api";
 import "./Grid.css";
 import "bulma/css/bulma.min.css";
@@ -41,26 +41,31 @@ export default function GridTable() {
           <GridCell
             key={song.id}
             bgcolor={song.album.album_color}
-            setlist={song.on_set_list}
             surprise={song.played}
+            setlist={song.on_set_list}
           >
-            <p className="song-title">{song.song_name || song.single_name}</p>
-
-            {song.played && (
-              <>
-                Venue: {song.played_at}
+            <GridFilter setlist={song.on_set_list} surprise={song.played} />
+            {/* <h1>TESTE</h1> */}
+            {/* </GridFilter> */}
+            <SongName setlist={song.on_set_list} surprise={song.played}>
+              <p className="song-title">{song.song_name || song.single_name}</p>
+              {song.on_set_list && <>On Average Setlist!</>}
+              {song.played && (
+                <>
+                  <p>Venue: {song.played_at}</p>
+                  <br />
+                  <p>Date: {formatDate(song.played_when)}</p>
+                </>
+              )}
+              <a
+                href={song.spotify_link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <br />
-                Date: {formatDate(song.played_when)}
-              </>
-            )}
-            <br />
-            <a
-              href={song.spotify_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Listen on Spotify
-            </a>
+                Listen on Spotify
+              </a>
+            </SongName>
           </GridCell>
         );
       });
