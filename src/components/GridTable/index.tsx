@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { ISong } from "../../interface/ISong";
 import { formatDate } from "../../utils/formatDate";
-import { GridCell, GridFilter, SongName } from "./styles";
+import { GridCell, GridFilter, SongName, SpotifyIcon } from "./styles";
 import api from "../../api";
 import "./Grid.css";
+import spotify from "../../img/spotify.png";
 import "bulma/css/bulma.min.css";
 
 export default function GridTable() {
@@ -45,25 +46,30 @@ export default function GridTable() {
             setlist={song.on_set_list}
           >
             <GridFilter setlist={song.on_set_list} surprise={song.played} />
-            {/* <h1>TESTE</h1> */}
-            {/* </GridFilter> */}
             <SongName setlist={song.on_set_list} surprise={song.played}>
               <p className="song-title">{song.song_name || song.single_name}</p>
               {song.on_set_list && <>On Average Setlist!</>}
-              {song.played && (
+              {song.played ? (
                 <>
                   <p>Venue: {song.played_at}</p>
-                  <br />
+
                   <p>Date: {formatDate(song.played_when)}</p>
                 </>
+              ) : (
+                <p>Not played yet!</p>
               )}
+              <br />
+              <br />
               <a
                 href={song.spotify_link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <br />
-                Listen on Spotify
+                <SpotifyIcon
+                  src={spotify}
+                  alt="White Spotify Logo"
+                  className="image is-24x24 spotify-icon"
+                />
               </a>
             </SongName>
           </GridCell>

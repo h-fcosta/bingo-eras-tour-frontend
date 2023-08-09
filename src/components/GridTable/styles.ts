@@ -12,19 +12,13 @@ interface SongDetailsProps {
 }
 
 export const GridCell = styled.td<GridCellProps>`
-  position: relative;
   width: 100px !important;
   heigth: 100px !important;
   background-color: ${(props) => props.bgcolor};
-`;
-
-export const SongName = styled.div<SongDetailsProps>`
+  font-size: 14px;
+  color: #fff;
+  vertical-align: top;
   position: relative;
-  top: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #fff !important;
-  z-index: 1;
 `;
 
 export const GridFilter = styled.div<SongDetailsProps>`
@@ -36,4 +30,19 @@ export const GridFilter = styled.div<SongDetailsProps>`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: ${(props) => (props.setlist || props.surprise ? 1 : -1)};
+`;
+
+export const SongName = styled.div<SongDetailsProps>`
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  color: #fff !important;
+  z-index: 1;
+`;
+
+export const SpotifyIcon = styled.img`
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
