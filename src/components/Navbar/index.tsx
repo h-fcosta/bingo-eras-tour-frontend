@@ -56,6 +56,14 @@ export default function Navbar() {
           >
             Inspired By
           </a>
+          <a
+            href="https://mischiefsmanaged.tumblr.com/post/637129593880526848/taylor-swift-album-covers-colour-palettes"
+            className="navbar-item"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Colors Inspiration
+          </a>
         </div>
       </div>
     </nav>
