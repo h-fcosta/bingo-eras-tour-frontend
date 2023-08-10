@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# The Eras Tour Surprise Song Bingo Frontend
+
+This is the backend part of the The Eras Tour Surprise Song Bingo project, responsible for managing data and providing APIs for the frontend.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Tech Used](#tech-used)
+- [Contact](#contact)
+- [License](#license)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the frontend locally on your machine, follow these steps:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **Clone the Repository:** Clone this repository to your local machine using the following command:
 
-### `npm test`
+   ```bash
+   git clone https://github.com/h-fcosta/bingo-eras-tour-frontend.git
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install Dependencies**: Navigate to the project directory and install the required dependencies using a package manager like npm or yarn:
 
-### `npm run build`
+```bash
+  cd bingo-eras-tour-frontend
+  npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Configure the enviroment variables**: API URL to access the data:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  REACT_APP_API_URL
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Start the Development Server**: Run the development server to view the application in your browser?
 
-### `npm run eject`
+```bash
+  npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+5. **Access the Application**: Open `http://localhost:3000` to access the application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- The application fetches the songs and singles from the API and render the data in bingo-like table.
+- Songs already played in the tour have a darker background and information of where and when played.
+- All songs have the Spotify link.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Tech Used
 
-## Learn More
+- React
+- Axios
+- TypeScript
+- Styled Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For any questions and suggestions, feel free to contact me at [henriquefcosta19@gmail.com]
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
