@@ -17,7 +17,6 @@ export default function GridTable() {
     try {
       api.get<ISong[]>("/songs").then((res) => {
         setData(res.data);
-        console.log(data);
       });
     } catch (error) {
       console.error("Error fetching data:", error);
