@@ -15,10 +15,11 @@ export default function Navbar() {
       aria-label="main navigation"
     >
       <div className="navbar-brand">
+        {/* eslint-disable-next-line */}
         <a className="navbar-item" href="#">
           <img src={logo} alt="Logo" width="112" height="28" />
         </a>
-
+        {/* eslint-disable-next-line */}
         <a
           role="button"
           className={`navbar-burger ${isActive ? "is-active" : ""}`}
@@ -55,14 +56,14 @@ export default function Navbar() {
           >
             Inspired By
           </a>
-          {/* <a
-            href="https://github.com/h-fcosta"
+          <a
+            href="https://mischiefsmanaged.tumblr.com/post/637129593880526848/taylor-swift-album-covers-colour-palettes"
             className="navbar-item"
             target="_blank"
             rel="noopener noreferrer"
           >
-            About the Dev
-          </a> */}
+            Colors Inspiration
+          </a>
         </div>
       </div>
     </nav>

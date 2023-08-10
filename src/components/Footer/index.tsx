@@ -13,6 +13,13 @@ export default function Footer() {
           </a>
           .
         </p>
+        <p>Not affiliated with Taylor Swift.</p>
+        <p>
+          For any suggestions or corrections contact me by e-mail:{" "}
+          <a href="mailto:henriquefcosta19@gmail.com">
+            henriquefcosta19@gmail.com
+          </a>
+        </p>
       </div>
     </footer>
   );
