@@ -8,15 +8,17 @@ import spotify from "../../img/spotify.png";
 import "bulma/css/bulma.min.css";
 
 export default function GridTable() {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<ISong[]>([]);
+
   const rows = 29;
   const columns = 7;
-
-  const [data, setData] = useState<ISong[]>([]);
 
   useEffect(() => {
     try {
       api.get<ISong[]>("/songs").then((res) => {
         setData(res.data);
+        setLoading(false);
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -80,8 +82,16 @@ export default function GridTable() {
   }
 
   return (
-    <table className="table is-bordered is-fullwidth">
-      <tbody>{generateGrid()}</tbody>
-    </table>
+    <>
+      {loading ? (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      ) : (
+        <table className="table is-bordered is-fullwidth">
+          <tbody>{generateGrid()}</tbody>
+        </table>
+      )}
+    </>
   );
 }
