@@ -49,8 +49,11 @@ export default function GridTable() {
             <GridFilter setlist={song.on_set_list} surprise={song.played} />
             <SongName setlist={song.on_set_list} surprise={song.played}>
               <p className="song-title">{song.song_name || song.single_name}</p>
-              {song.on_set_list && <>On Average Setlist!</>}
-              {song.played ? (
+              {song.on_set_list ? (
+                <>
+                  <p>On Average Setlist!</p>
+                </>
+              ) : song.played ? (
                 <>
                   <p>Venue: {song.played_at}</p>
 
