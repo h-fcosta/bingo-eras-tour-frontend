@@ -41,6 +41,14 @@ export default function Navbar() {
       >
         <div className="navbar-start">
           <a
+            href="https://www.setlist.fm/stats/average-setlist/taylor-swift-3bd6bc5c.html?year=2023"
+            className="navbar-item"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Average Setlist
+          </a>
+          <a
             href="https://www.setlist.fm/setlists/taylor-swift-3bd6bc5c.html"
             className="navbar-item"
             target="_blank"
@@ -48,6 +56,7 @@ export default function Navbar() {
           >
             Setlists Source
           </a>
+
           <a
             href="https://www.instagram.com/reel/Ctk10xHtVee/?igshid=MzRlODBiNWFlZA=="
             className="navbar-item"
