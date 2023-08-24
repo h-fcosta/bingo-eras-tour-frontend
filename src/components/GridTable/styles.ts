@@ -43,6 +43,13 @@ export const SongName = styled.div<SongDetailsProps>`
 export const SpotifyIcon = styled.img`
   position: absolute;
   bottom: 5px;
-  left: 50%;
+  left: calc(50% - 15px);
+  transform: translateX(-50%);
+`;
+
+export const DeezerIcon = styled.img`
+  position: absolute;
+  bottom: 5px;
+  left: calc(50% + 15px);
   transform: translateX(-50%);
 `;

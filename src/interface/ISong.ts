@@ -1,16 +1,24 @@
 export interface ISong {
   id: string;
-  spotify_song_id: string;
   song_name: string;
   single_name: string;
-  spotify_link: string;
   played: string;
   played_at: string;
   played_when: string;
   on_set_list: string;
+  albumId: string;
+  links: {
+    id: string;
+    spotify_id: string;
+    spotify_link: string;
+    deezer_id: string;
+    deezer_link: string;
+    albumId: string;
+    songId: string;
+    singleId: string;
+  };
   album: {
-    release_order: number;
+    release_order: string;
     album_color: string;
   };
-  albumId: string;
 }

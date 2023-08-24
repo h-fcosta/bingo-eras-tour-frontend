@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { ISong } from "../../interface/ISong";
 import { formatDate } from "../../utils/formatDate";
-import { GridCell, GridFilter, SongName, SpotifyIcon } from "./styles";
+import {
+  DeezerIcon,
+  GridCell,
+  GridFilter,
+  SongName,
+  SpotifyIcon
+} from "./styles";
 import api from "../../api";
 import "./Grid.css";
 import spotify from "../../img/spotify.png";
+import deezer from "../../img/deezer.png";
 import "bulma/css/bulma.min.css";
 
 export default function GridTable() {
@@ -65,14 +72,25 @@ export default function GridTable() {
               <br />
               <br />
               <a
-                href={song.spotify_link}
+                href={song.links.spotify_link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <SpotifyIcon
                   src={spotify}
                   alt="White Spotify Logo"
-                  className="image is-24x24 spotify-icon"
+                  className="image is-24x24"
+                />
+              </a>
+              <a
+                href={song.links.deezer_link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <DeezerIcon
+                  src={deezer}
+                  alt="White Deezer Logo"
+                  className="image is-24x24"
                 />
               </a>
             </SongName>
