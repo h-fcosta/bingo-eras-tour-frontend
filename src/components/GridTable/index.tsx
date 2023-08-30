@@ -18,7 +18,6 @@ export default function GridTable() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<ISong[]>([]);
 
-  const rows = 29;
   const columns = 7;
 
   useEffect(() => {
@@ -38,11 +37,14 @@ export default function GridTable() {
     const tableRows = [];
     const songChunks = [];
 
-    for (let i = 0; i < data.length; i += columns) {
-      songChunks.push(data.slice(i, i + columns));
+    const isMobile = window.innerWidth <= 480;
+    const numRows = Math.ceil(data.length / (isMobile ? 3 : columns));
+
+    for (let i = 0; i < data.length; i += isMobile ? 3 : columns) {
+      songChunks.push(data.slice(i, i + (isMobile ? 3 : columns)));
     }
 
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < numRows; i++) {
       const songRow = songChunks[i] || [];
 
       const rowCells = songRow.map((song) => {
