@@ -1,12 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../img/logo.png";
+import AlbumFilter from "./AlbumFilter";
+import { IAlbum } from "../../interface/IAlbum";
+import api from "../../api";
+import { cacheAlbums, getCachedAlbums } from "../../db/cacheFunctions";
+import SongFilter from "./SongFilter";
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
 
+  const [albums, setAlbums] = useState<IAlbum[]>([]);
+
   function toggleNavBar() {
     setIsActive(!isActive);
   }
+
+  useEffect(() => {
+    async function fetchAlbums() {
+      const cachedAlbums = await getCachedAlbums();
+
+      if (cachedAlbums) {
+        setAlbums(cachedAlbums);
+      } else {
+        try {
+          const response = await api.get<IAlbum[]>("/albums");
+
+          const fetchedAlbums = response.data;
+
+          await cacheAlbums(fetchedAlbums);
+
+          setAlbums(fetchedAlbums);
+        } catch (error: any) {
+          console.error("Error fetching albums:", error);
+        }
+      }
+    }
+
+    fetchAlbums();
+  }, []);
 
   return (
     <nav
@@ -73,6 +104,14 @@ export default function Navbar() {
           >
             Colors Inspiration
           </a>
+        </div>
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <SongFilter />
+          </div>
+          <div className="navbar-item">
+            <AlbumFilter albums={albums} />
+          </div>
         </div>
       </div>
     </nav>

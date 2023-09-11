@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import { ISong } from "../../interface/ISong";
-import { formatDate } from "../../utils/formatDate";
-import {
-  DeezerIcon,
-  GridCell,
-  GridFilter,
-  SongName,
-  SpotifyIcon
-} from "./styles";
+import GenerateGrid from "./GenerateGrid";
 import api from "../../api";
 import "./Grid.css";
-import spotify from "../../img/spotify.png";
-import deezer from "../../img/deezer.png";
+import { cacheSongs, getCachedSongs } from "../../db/cacheFunctions";
 import "bulma/css/bulma.min.css";
 
 export default function GridTable() {
@@ -21,88 +13,30 @@ export default function GridTable() {
   const columns = 7;
 
   useEffect(() => {
-    try {
-      api.get<ISong[]>("/songs").then((res) => {
-        setData(res.data);
+    async function fetchData() {
+      const cachedData = await getCachedSongs();
+
+      if (cachedData) {
+        setData(cachedData);
         setLoading(false);
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      } else {
+        try {
+          const response = await api.get<ISong[]>("/songs");
+
+          const fetchedData = response.data;
+
+          await cacheSongs(fetchedData);
+
+          setData(fetchedData);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
     }
 
-    // eslint-disable-next-line
+    fetchData();
   }, []);
-
-  function generateGrid() {
-    const tableRows = [];
-    const songChunks = [];
-
-    const isMobile = window.innerWidth <= 480;
-    const numRows = Math.ceil(data.length / (isMobile ? 3 : columns));
-
-    for (let i = 0; i < data.length; i += isMobile ? 3 : columns) {
-      songChunks.push(data.slice(i, i + (isMobile ? 3 : columns)));
-    }
-
-    for (let i = 0; i < numRows; i++) {
-      const songRow = songChunks[i] || [];
-
-      const rowCells = songRow.map((song) => {
-        return (
-          <GridCell
-            key={song.id}
-            bgcolor={song.album.album_color}
-            surprise={song.played}
-            setlist={song.on_set_list}
-          >
-            <GridFilter setlist={song.on_set_list} surprise={song.played} />
-            <SongName setlist={song.on_set_list} surprise={song.played}>
-              <p className="song-title">{song.song_name || song.single_name}</p>
-              {song.on_set_list ? (
-                <>
-                  <p>On Average Setlist!</p>
-                </>
-              ) : song.played ? (
-                <>
-                  <p>Venue: {song.played_at}</p>
-
-                  <p>Date: {formatDate(song.played_when)}</p>
-                </>
-              ) : (
-                <p>Not played yet!</p>
-              )}
-              <br />
-              <br />
-              <a
-                href={song.links.spotify_link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SpotifyIcon
-                  src={spotify}
-                  alt="White Spotify Logo"
-                  className="image is-24x24"
-                />
-              </a>
-              <a
-                href={song.links.deezer_link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <DeezerIcon
-                  src={deezer}
-                  alt="White Deezer Logo"
-                  className="image is-24x24"
-                />
-              </a>
-            </SongName>
-          </GridCell>
-        );
-      });
-      tableRows.push(<tr key={i}>{rowCells}</tr>);
-    }
-    return tableRows;
-  }
 
   return (
     <>
@@ -112,7 +46,9 @@ export default function GridTable() {
         </div>
       ) : (
         <table className="table is-bordered is-fullwidth">
-          <tbody>{generateGrid()}</tbody>
+          <tbody>
+            <GenerateGrid columns={columns} data={data} />
+          </tbody>
         </table>
       )}
     </>

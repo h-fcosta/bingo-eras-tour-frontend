@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 interface GridCellProps {
-  setlist: string;
-  surprise: string;
+  setlist: boolean;
+  surprise: boolean;
   bgcolor: string;
 }
 
 interface SongDetailsProps {
-  setlist: string;
-  surprise: string;
+  setlist: boolean;
+  surprise: boolean;
 }
 
 export const GridCell = styled.td<GridCellProps>`

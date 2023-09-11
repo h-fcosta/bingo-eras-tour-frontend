@@ -2,10 +2,10 @@ export interface ISong {
   id: string;
   song_name: string;
   single_name: string;
-  played: string;
+  played: boolean;
   played_at: string;
   played_when: string;
-  on_set_list: string;
+  on_set_list: boolean;
   albumId: string;
   links: {
     id: string;
@@ -18,7 +18,10 @@ export interface ISong {
     singleId: string;
   };
   album: {
+    id: string;
+    album_name: string;
     release_order: string;
     album_color: string;
   };
+  timestamp?: number;
 }
