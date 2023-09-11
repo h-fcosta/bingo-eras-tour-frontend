@@ -28,6 +28,13 @@ export default function SongFilter() {
         <div className="dropdown-trigger">
           <button
             className="button"
+            aria-label={
+              selectedStatus === null
+                ? "Filter by Song Status"
+                : selectedStatus
+                ? "Played"
+                : "Not Played Yet"
+            }
             aria-haspopup="true"
             aria-controls="dropdown-menu"
             onClick={toggleDropdown}
@@ -45,6 +52,7 @@ export default function SongFilter() {
           </button>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
                 href="#"
                 className={`dropdown-item ${
@@ -54,6 +62,7 @@ export default function SongFilter() {
               >
                 All Songs
               </a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
                 href="#"
                 className={`dropdown-item ${
@@ -63,6 +72,7 @@ export default function SongFilter() {
               >
                 Played
               </a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
                 href="#"
                 className={`dropdown-item ${

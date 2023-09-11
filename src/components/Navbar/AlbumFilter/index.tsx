@@ -29,7 +29,8 @@ export default function AlbumFilter({ albums }: IAlbumFilterProps) {
         <div className="dropdown-trigger">
           <button
             className="button"
-            aria-label="true"
+            aria-label={selectedAlbum ? selectedAlbum : "Filter by Era"}
+            aria-haspopup="true"
             aria-controls="dropdown-menu"
             onClick={toggleDropdown}
           >
@@ -41,6 +42,7 @@ export default function AlbumFilter({ albums }: IAlbumFilterProps) {
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a
               href="#"
               className={`dropdown-item ${
@@ -51,8 +53,9 @@ export default function AlbumFilter({ albums }: IAlbumFilterProps) {
               All Eras
             </a>
             {albums.map((album) => (
+              /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
               <a
-                href="#"
+                href="#" // eslint-disable-line no-use-before-define
                 className={`dropdown-item ${
                   selectedAlbum === album.album_name ? "is-active" : ""
                 }`}
