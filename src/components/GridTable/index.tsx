@@ -12,8 +12,6 @@ export default function GridTable() {
 
   const columns = 7;
 
-  //random comment
-
   useEffect(() => {
     async function fetchData() {
       const cachedData = await getCachedSongs();

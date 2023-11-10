@@ -21,7 +21,7 @@ export async function cacheSongs(songs: ISong[]): Promise<void> {
 export async function getCachedSongs(): Promise<ISong[] | undefined> {
   try {
     const currentTime = new Date().getTime();
-    const expirationThreshold = 2 * 24 * 60 * 60 * 1000; //2 day in milliseconds
+    const expirationThreshold = 18 * 60 * 60 * 1000; //2 day in milliseconds
     const cachedSongs = await db.song.toArray();
 
     const sortedSongs = cachedSongs.sort((a, b) => {
